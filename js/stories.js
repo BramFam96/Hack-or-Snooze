@@ -107,6 +107,7 @@ const putUserStoriesOnPage = () => {
 			$ownStories.append($story)
 		}
 	}
+
 	$ownStories.show()
 }
 //Toggle user preference
@@ -134,7 +135,6 @@ const deleteStory = async (e) => {
 	const id = $targetStory.attr('id')
 	$targetStory.remove()
 	await storyList.removeStory(currentUser, id)
-	putUserStoriesOnPage()
+	await putUserStoriesOnPage()
 }
 $ownStories.on('click', '.trash-can', deleteStory)
-/** Gets list of stories from server, generates their HTML, and puts on page. */

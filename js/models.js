@@ -84,19 +84,20 @@ class StoryList {
 		user.ownStories.unshift(story)
 		return story
 	}
-	async removeStory(user, id) {
+
+	async removeStory(user, storyId) {
 		const deleteConfig = {
-			url: `${BASE_URL}/stories/${id}`,
+			url: `${BASE_URL}/stories/${storyId}`,
 			method: 'DELETE',
 			data: { token: user.loginToken },
 		}
 		//Updating stories in the api:
 		await axios(deleteConfig)
-		//updating stories on homepage:
-		this.stories = this.stories.filter((s) => s.id !== id)
-		//updating fav and own stories
-		user.favorites = user.favorites.filter((s) => s.id !== id)
-		user.ownStories = user.ownStories.filter((s) => s.id !== id)
+		//updating story array
+		this.stories = this.stories.filter((s) => s.storyId !== storyId)
+		//updating fav and own story array
+		user.favorites = user.favorites.filter((s) => s.storyId !== storyId)
+		user.ownStories = user.ownStories.filter((s) => s.storyId !== storyId)
 	}
 }
 
