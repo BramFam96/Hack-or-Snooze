@@ -34,13 +34,14 @@
 		<!-- top navigation bar -->
 		<nav>
 			<div class="navbar-brand">
-				<a class="nav-link" href="#" id="nav-all">Hack or Snooze</a>
+				<a class="nav-link" href="#" id="nav-home">Hack or Snooze</a>
 			</div>
 			<div class="nav-right">
 				<a class="nav-link" href="#" id="nav-login">Login/Signup</a>
 				<a class="nav-link" href="#" id="nav-submit">Submit</a>
 				<a class="nav-link" href="#" id="nav-favorite">Favorites</a>
-				<a class="nav-link" href="#" id="nav-user-story"></a>
+
+				<!-- <a class="nav-link" href="#" id="nav-user-story"></a> -->
 
 				<a class="hidden" id="nav-logout" href="#"><small>(logout)</small></a>
 			</div>
@@ -80,7 +81,12 @@
 				<h4>Login</h4>
 				<div class="login-input">
 					<label for="login-username">username</label>
-					<input id="login-username" autocomplete="current-username" />
+					<input
+						type="text"
+						id="login-username"
+						autocomplete="current-username"
+						required
+					/>
 				</div>
 				<div class="login-input">
 					<label for="login-password">password</label>
@@ -88,6 +94,7 @@
 						id="login-password"
 						type="password"
 						autocomplete="current-password"
+						required
 					/>
 				</div>
 				<button type="submit">login</button>
@@ -103,11 +110,21 @@
 				</div>
 				<div class="login-input">
 					<label for="signup-username">username</label>
-					<input id="signup-username" autocomplete="new-username" />
+					<input
+						type="text"
+						id="signup-username"
+						placeholder="new-username"
+						required
+					/>
 				</div>
 				<div class="login-input">
 					<label for="signup-password">password</label>
-					<input id="signup-password" autocomplete="new-password" type="password" />
+					<input
+						id="signup-password"
+						placeholder="new-password"
+						type="password"
+						required
+					/>
 				</div>
 				<button type="submit">create account</button>
 			</form>

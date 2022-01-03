@@ -24,7 +24,8 @@ class Story {
 
 	getHostName() {
 		// UNIMPLEMENTED: complete this function!
-		return BASE_URL
+		const hostUri = new URL(this.url)
+		return hostUri.hostname
 	}
 }
 
@@ -72,6 +73,7 @@ class StoryList {
 	 */
 
 	async addStory(user, { title, author, url }) {
+		console.debug('addStory')
 		const postConfig = {
 			method: 'POST',
 			url: `${BASE_URL}/stories`,
@@ -85,19 +87,20 @@ class StoryList {
 		return story
 	}
 
-	async removeStory(user, storyId) {
+	async removeStory(user, id) {
+		console.debug('removeStory')
 		const deleteConfig = {
-			url: `${BASE_URL}/stories/${storyId}`,
+			url: `${BASE_URL}/stories/${id}`,
 			method: 'DELETE',
 			data: { token: user.loginToken },
 		}
 		//Updating stories in the api:
 		await axios(deleteConfig)
 		//updating story array
-		this.stories = this.stories.filter((s) => s.storyId !== storyId)
+		this.stories = this.stories.filter((s) => s.storyId !== id)
 		//updating fav and own story array
-		user.favorites = user.favorites.filter((s) => s.storyId !== storyId)
-		user.ownStories = user.ownStories.filter((s) => s.storyId !== storyId)
+		user.favorites = user.favorites.filter((s) => s.storyId !== id)
+		user.ownStories = user.ownStories.filter((s) => s.storyId !== id)
 	}
 }
 
@@ -213,10 +216,12 @@ class User {
 	}
 
 	async addFavorite(story) {
+		console.debug('addFavorite')
 		this.favorites.push(story)
 		await this.handleFavoriteUpdates('POST', story)
 	}
 	async removeFavorite(story) {
+		console.debug('removeFavorite')
 		//assign to this.favorites again
 		this.favorites = this.favorites.filter(
 			(stories) => stories.storyId != story.storyId

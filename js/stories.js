@@ -42,7 +42,7 @@ const makeTrashBtn = () => {
 }
 
 //Update page elements
-const handleStorySubmit = async (e) => {
+const submitStory = async (e) => {
 	console.debug('submitNewStory')
 	e.preventDefault()
 
@@ -50,7 +50,7 @@ const handleStorySubmit = async (e) => {
 	const title = $('#title-input').val()
 	const url = $('#url-input').val()
 	const author = $('#author-input').val()
-	console.log(title, url, author)
+
 	const username = currentUser.username
 	const storyData = { title, url, author, username }
 
@@ -61,12 +61,12 @@ const handleStorySubmit = async (e) => {
 
 	// hide the form and reset it
 
-	$submitForm.trigger('reset')
-	$submitForm.hide()
+	$submitForm.trigger('reset').hide()
+	// $submitForm.hide()
 	putStoriesOnPage()
 }
 
-$submitForm.on('submit', handleStorySubmit)
+$submitForm.on('submit', submitStory)
 
 const putStoriesOnPage = () => {
 	// console.debug('putStoriesOnPage')
@@ -113,6 +113,7 @@ const putUserStoriesOnPage = () => {
 //Toggle user preference
 
 const toggleFavorite = async (e) => {
+	console.debug('toggleFavorite')
 	//Get the id of the item we favorite:
 	const $star = $(e.target)
 
@@ -135,6 +136,6 @@ const deleteStory = async (e) => {
 	const id = $targetStory.attr('id')
 	$targetStory.remove()
 	await storyList.removeStory(currentUser, id)
-	await putUserStoriesOnPage()
+	putUserStoriesOnPage()
 }
 $ownStories.on('click', '.trash-can', deleteStory)

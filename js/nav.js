@@ -7,7 +7,7 @@
 /** Show main list of all stories when click site name */
 
 function navAllStories(evt) {
-	console.debug('navAllStories', evt)
+	console.debug('navAllStories')
 	hidePageComponents()
 	putStoriesOnPage()
 }
@@ -26,28 +26,38 @@ function navLoginClick(evt) {
 $navLogin.on('click', navLoginClick)
 
 /** When a user first logins in, update the navbar to reflect that. */
-const navSubmitClick = () => {
+const navSubmit = () => {
+	console.debug('navSubmit')
 	hidePageComponents()
 	$submitForm.show()
 }
-$navSubmit.on('click', navSubmitClick)
+$navSubmit.on('click', navSubmit)
 
-const navFavClick = () => {
+const navFav = () => {
+	console.debug('navFav')
 	hidePageComponents()
 	putFavoritesOnPage()
 }
-$navFavorites.on('click', navFavClick)
+$navFavorites.on('click', navFav)
 
 function updateNavOnLogin() {
 	console.debug('updateNavOnLogin')
-	$('.main-nav-links').show()
 	$navLogin.hide()
+	$navFavorites.show()
 	$navLogOut.show()
-	$navUserStory.text(`${currentUser.username}`).show()
+	$navUserStory.text(`${currentUser.username}`)
+	$navUserStory.show()
 }
-const navStoryClick = () => {
+function updateNavOnLogout() {
+	console.debug('updateNavOnLogout')
+	$navLogin.show()
+	$navLogOut.hide()
+}
+
+const navUserStory = () => {
+	console.debug('navUserStory')
 	hidePageComponents()
 	putUserStoriesOnPage()
 	$ownStories.show()
 }
-$body.on('click', '#nav-user-story', navStoryClick)
+$body.on('click', '#nav-user-story', navUserStory)

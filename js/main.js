@@ -18,6 +18,7 @@ const $authorInput = $('#author-input')
 const $titleInput = $('#title-input')
 const $urlInput = $('#url-input')
 //nav
+const $navLinks = $('.nav-links')
 const $navLogin = $('#nav-login')
 const $navSubmit = $('#nav-submit')
 const $navFavorites = $('#nav-favorite')
